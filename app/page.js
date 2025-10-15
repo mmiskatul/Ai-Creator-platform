@@ -4,7 +4,7 @@ import React from 'react'
 function MainPage() {
   return (
     <div className='flex items-center justify-center'>
-      <Button></Button>
+      <Button variant={"destructive"}>this is the button</Button>
     </div>
   )
 }
