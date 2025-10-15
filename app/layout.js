@@ -1,10 +1,12 @@
-import {  Inter } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { ConvexClientProvider } from "./ConvexClientProvider";
 import { ClerkProvider } from "@clerk/nextjs";
+import { shadesOfPurple } from "@clerk/themes";
+import Header from "@/components/header";
 
-const inter =Inter({subsets: ["latin"]});
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
   title: "AI Content Platform",
@@ -13,27 +15,28 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    
     <html lang="en" suppressHydrationWarning>
-      <body
-        className={` ${inter.className} antialiased`}
-      >
+      <body className={` ${inter.className} antialiased`}>
         <ThemeProvider
-            attribute="class"
-            defaultTheme="dark"
-            enableSystem
-            disableTransitionOnChange
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <ClerkProvider
+            appearance={{
+              baseTheme: shadesOfPurple,
+            }}
           >
-            <ClerkProvider>
             <ConvexClientProvider>
-
-            {/* Header  */}
-            <main className="bg-slate-900 min-h-screen text-white overflow-x-hidden">
-            {children}
-            </main>
+              <Header/>
+              {/* Header  */}
+              <main className="bg-slate-900 min-h-screen text-white overflow-x-hidden">
+                {children}
+              </main>
             </ConvexClientProvider>
-            </ClerkProvider>
-          </ThemeProvider>
+          </ClerkProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
